@@ -4,3 +4,6 @@ PORT=8028
 run:
 	python manage.py runserver $(PORT)
 
+migrate:
+	python manage.py migrate
+
