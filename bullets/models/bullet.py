@@ -19,7 +19,7 @@ class Bullet(PolymorphicModel):
     class Signifier(models.TextChoices):
         PRIORITY = '*'
         INSPIRATION = '!'
-        NONE = ''
+        NONE = ' '
 
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     value = models.CharField(max_length=255)
@@ -30,3 +30,5 @@ class Bullet(PolymorphicModel):
     def __str__(self):
         return f"{self.signifier} {self.symbol} {self.value}"
     
+    def view(self):
+        return str(self)

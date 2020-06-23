@@ -1,3 +1,2 @@
 django~=3.0
-emoji~=0.5.4
 django-polymorphic~=2.1.2
