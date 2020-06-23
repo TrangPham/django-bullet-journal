@@ -30,5 +30,3 @@ class Bullet(PolymorphicModel):
     def __str__(self):
         return f"{self.signifier} {self.symbol} {self.value}"
     
-    def view(self):
-        return str(self)
