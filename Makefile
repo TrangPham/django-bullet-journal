@@ -5,5 +5,10 @@ run:
 	python manage.py runserver $(PORT)
 
 migrate:
-	python manage.py migrate
+	python manage.py migrate $(APP) $(OPTIONS)
 
+migrations:
+	python manage.py migrations $(APP)
+
+shell:
+	python manage.py shell
