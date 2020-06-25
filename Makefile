@@ -15,6 +15,6 @@ shell:
 	python manage.py shell
 
 reset-db:
-	rm db.sqlite3
+	rm -f db.sqlite3
 	make migrate
 	python manage.py createsuperuser

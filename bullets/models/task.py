@@ -3,6 +3,9 @@ from django.db import models
 from bullets.models import Bullet
 
 class Task(Bullet):
+    class Meta:
+        db_table = "task"
+
     @property
     def name(self):
         return "Task"

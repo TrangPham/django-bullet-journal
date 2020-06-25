@@ -4,6 +4,9 @@ from bullets.models import Bullet
 
 
 class Note(Bullet):
+    class Meta:
+        db_table = "note"
+
     @property
     def name(self):
         return "Note"

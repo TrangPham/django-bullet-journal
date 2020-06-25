@@ -4,6 +4,9 @@ from bullets.models import Bullet
 
 
 class Event(Bullet):
+    class Meta:
+        db_table = "event"
+
     @property
     def name(self):
         return "Event"

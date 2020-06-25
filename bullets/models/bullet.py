@@ -1,9 +1,13 @@
 import uuid
 from django.db import models
 from django.utils import timezone
-from polymorphic.models import PolymorphicModel
+from django.contrib.auth.models import User
 
-class Bullet(PolymorphicModel):
+class Bullet(models.Model):
+    class Meta:
+        abstract = True
+        auto_created = True
+
     @property
     def name(self):
         raise NotImplementedError()
@@ -26,6 +30,7 @@ class Bullet(PolymorphicModel):
     created_at = models.DateTimeField(default=timezone.now, editable=False)
     updated_at = models.DateTimeField(default=timezone.now)
     signifier = models.CharField(choices=Signifier.choices, default=Signifier.NONE, max_length=4)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.signifier} {self.symbol} {self.value}"
