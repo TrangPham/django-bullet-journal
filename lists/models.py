@@ -32,4 +32,4 @@ class ListItem(models.Model):
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     content_uuid = models.UUIDField()
-    content_object = GenericForeignKey('content_type', 'content_uuid')
+    content = GenericForeignKey('content_type', 'content_uuid')
