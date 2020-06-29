@@ -27,10 +27,10 @@ class Bullet(models.Model):
 
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     value = models.CharField(max_length=255)
-    created_at = models.DateTimeField(default=timezone.now, editable=False)
-    updated_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     signifier = models.CharField(choices=Signifier.choices, default=Signifier.NONE, max_length=4)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    # owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.signifier} {self.symbol} {self.value}"
