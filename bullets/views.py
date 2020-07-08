@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from django.core.exceptions import ValidationError
 from django.views import generic
@@ -47,3 +47,22 @@ class TaskDetailView(DetailView):
 
 class EventDetailView(DetailView):
     model = Event
+
+
+def note_add(request):
+    value = request.POST["value"]
+    Note(value=value).save()
+    return redirect("bullets:note-index")
+
+
+def task_add(request):
+    pass
+
+
+def event_add(request):
+    pass
+
+
+def detail_path(model):
+    return "bullets:{}-detail".format(model.__name__.lower())
+

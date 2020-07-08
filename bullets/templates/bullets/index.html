@@ -4,3 +4,8 @@
     <li><a href="{% url path object.id %}">{{ object }}</a></li>
     {% endfor %}
 </ul>
+<form action="{% url 'bullets:note-add'%}" method="post">
+    {% csrf_token %}
+    <input type="text" name="value" id="value">
+    <input type="submit" value="Add">
+</form>
