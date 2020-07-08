@@ -3,30 +3,47 @@ from django.http import HttpResponse, Http404
 from django.core.exceptions import ValidationError
 from django.views import generic
 
-from bullets.models import *
+from bullets.models import Task, Note, Event
 
-class DetailView(generic.DetailView):
-    template_name = 'bullets/detail.html'
-    context_object_name = 'object'
 
-class NoteView(DetailView):
+class IndexView(generic.ListView):
+    template_name = "bullets/index.html"
+    context_object_name = "list"
+
+    def get_queryset(self):
+        return self.model.objects.order_by("-created_at")[:20]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["path"] = "bullets:{}-detail".format(self.model.__name__.lower())
+        context["heading"] = self.model.__name__ + "s"
+        return context
+
+
+class NoteIndexView(IndexView):
     model = Note
 
-def task(request, uuid):
-    return handle_get(Task, uuid)
 
-def note(request, uuid):
-    return handle_get(Note, uuid)
+class TaskIndexView(IndexView):
+    model = Task
 
-def event(request, uuid):
-    return handle_get(Event, uuid)
 
-def handle_get(model, uuid):
-    try:
-        obj = model.objects.get(uuid=uuid)
-    except ValidationError:
-        return HttpResponse(status=400)
-    except model.DoesNotExist:
-        raise Http404("Task does not exist.")
+class EventIndexView(IndexView):
+    model = Event
 
-    return HttpResponse(str(obj))    
+
+class DetailView(generic.DetailView):
+    template_name = "bullets/detail.html"
+    context_object_name = "object"
+
+
+class NoteDetailView(DetailView):
+    model = Note
+
+
+class TaskDetailView(DetailView):
+    model = Task
+
+
+class EventDetailView(DetailView):
+    model = Event

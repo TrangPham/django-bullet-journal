@@ -2,8 +2,12 @@ from django.urls import path
 
 from . import views
 
+app_name = "bullets"
 urlpatterns = [
-    path('notes/<str:pk>/', views.NoteView.as_view() , name='note'),
-    path('tasks/<str:uuid>/', views.task, name='task'),
-    path('events/<str:uuid>/', views.event, name='event'),
+    path("notes/", views.NoteIndexView.as_view(), name="note-index"),
+    path("tasks/", views.TaskIndexView.as_view(), name="task-index"),
+    path("events/", views.EventIndexView.as_view(), name="event-indexx"),
+    path("notes/<str:pk>/", views.NoteDetailView.as_view(), name="note-detail"),
+    path("tasks/<str:pk>/", views.TaskDetailView.as_view(), name="task-detail"),
+    path("events/<str:pk>/", views.EventDetailView.as_view(), name="event_detail"),
 ]

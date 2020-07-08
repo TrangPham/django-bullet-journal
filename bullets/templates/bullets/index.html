@@ -1,0 +1,6 @@
+<h1>{{ heading }}</h1>
+<ul>
+    {% for object in list %}
+    <li><a href="{% url path object.id %}">{{ object }}</a></li>
+    {% endfor %}
+</ul>
