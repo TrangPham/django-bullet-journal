@@ -25,7 +25,7 @@ class Bullet(models.Model):
         INSPIRATION = '!'
         NONE = ' '
 
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     value = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -34,4 +34,3 @@ class Bullet(models.Model):
 
     def __str__(self):
         return f"{self.signifier} {self.symbol} {self.value}"
-    
